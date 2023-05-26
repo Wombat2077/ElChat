@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('login', 50);
-            $table->string('email', 50);
-            $table->string('password', 50);
-            $table->integer('level')->default(1);
-            $table->bigInteger('money')->default(0);
-            $table->integer('roleslots')->default(3);
+            $table->string('content');
+            $table->string('system_role');
+            $table->unsignedBigInteger("chat_id");
+            $table->foreign('chat_id')->references('id')->on('chats');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('messages');
     }
 };

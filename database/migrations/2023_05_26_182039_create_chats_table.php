@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
-            $table->string('description', 2000)->nullable();
+            $table->string('name', 50)->nullable();
+            $table->string('description', 500)->nullable();
             $table->unsignedBigInteger("user_id");
             $table->foreign('user_id')->references('id')->on('users');
-            // !!!TODO: Решить с картинками для ролей!!!
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('chats');
     }
 };

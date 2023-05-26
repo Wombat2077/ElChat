@@ -18,3 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('open-ai', [ChatGptController::class, 'index']);
+Route::get("/login", [AuthController::class, 'Login'])->name('login');
+//Route::get("/", ChatController::class, 'Chat')->name('main');

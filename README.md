@@ -74,4 +74,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 # ElChat
 new ChatGPT client by MIneCraft crew EasyLife
 
->>>>>>> fdbbc03ca8e3150fd09a0c078d4f7dbc8dd0d682
+

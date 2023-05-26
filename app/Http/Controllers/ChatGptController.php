@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Http;  
+use Illuminate\Support\Facades\Http;
+use App\Models\Roles;  
 
 class ChatGptController extends Controller
 {
-    public function index(): JsonResponse
+    public function index($promt, $role=null): JsonResponse
 
     {
-        $search = "laravel get ip address";
+        $roles = new Roles();
+        $promt = $role!=null?$roles->find($role)->content . promt : promt;
         $data = Http::withHeaders([
                     'Content-Type' => 'application/json',
                     'Authorization' => 'Bearer '.env('OPENAI_API_KEY'),
@@ -22,7 +24,7 @@ class ChatGptController extends Controller
                     'messages' => [
                         [
                            "role" => "user",
-                           "content" => $search
+                           "content" => $promt
                        ]
 
                     ],
