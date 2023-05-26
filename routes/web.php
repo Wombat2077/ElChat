@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatGptController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,11 @@ use App\Http\Controllers\ChatGptController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('open-ai', [ChatGptController::class, 'index']);
-Route::get("/login", [AuthController::class, 'Login'])->name('login');
-//Route::get("/", ChatController::class, 'Chat')->name('main');
+//Route::get('/', function () {
+//   return view('welcome');
+//});
+Route::get('/open-ai', [ChatGptController::class, 'index']);
+Route::post('/login/enter', [AuthController::class, 'login'])->name('login');
+Route::get("/login", [AuthController::class, 'loginview'])->name('loginpage');
+Route::get("/", [ChatController::class, 'Chat'])->name('main');
+Route::get("/register", [AuthController::class, 'register'])->name('register');

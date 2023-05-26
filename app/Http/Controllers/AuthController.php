@@ -8,8 +8,10 @@ use App\Models\Users;
 
 class AuthController extends Controller
 {
-    public function login( $login = null, $password=null)
+    public function login($req)
     {
+        $login = $req->input("login");
+        $password = $req->input("password");
         $dbuser = new Users();
         $user = $dbuser ->where("Login", $login, )->where("Password", $password)->first(); // TODO: Реализовать проверку хешированного пароля
         if($user == null){
@@ -20,10 +22,10 @@ class AuthController extends Controller
         }
     }
     public function register($login, $email, $password, ){
-        $dbuser = new Users();
-        $dbuser->login = $login;
-        $dbuser->email = $email;
-        $dbuser->password = $password; // !!! ToDO: Добавить хеширование паролей !!!
-        $dbuser->save();
+        $user = new Users();
+        $user->login = $login;
+        $user->email = $email;
+        $user->password = $password; // !!! ToDO: Добавить хеширование паролей !!!
+        $user->save();
     }
 }
