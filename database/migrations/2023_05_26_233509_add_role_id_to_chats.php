@@ -12,11 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('chats', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 50)->nullable();
-            $table->string('description', 500)->nullable();
-            $table->unsignedBigInteger("user_id");
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('role_id');
+            $table->foreign("role_id")->references("id")->on("roles");
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('chats');
+        Schema::table('chats', function (Blueprint $table) {
+            //
+        });
     }
 };
