@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
@@ -19,10 +20,19 @@ class AuthController extends Controller
             return redirect()->route('login_page')->with('UserNotFound', "Неверное имя пользователя или пароль");
         }
         else{
-            session(['user_id' => $user->id]);
+            Auth::login($user);
             return redirect()->route('main');
         }
     }
+    public function logout(Request $req): RedirectResponse
+    {
+        Auth::logout();
+        $req->session()->invalidate();
+        $req->session()->regenerateToken();
+     
+        return redirect('/');
+    }
+
     public function login_view()
     {
         return view('login');
@@ -30,12 +40,16 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $req ){
         $user = new Users();
-        $user->login = $req->input("login");
+        $login = $req->input("login");
+        if($user->where('login', $login)->first() != null){
+            return redirect()->route("register_page")->with("UserAlreadyExist", "User with this login already exist");
+        }
+        $user->login = $login;
         $user->email = $req->input("email");
-        $user->password = $req->input("password");
+        $user->password = crypt($req->input("password"));
          // !!! TODO: Добавить хеширование паролей !!!
         $user->save();
-        session(['user_id' => $user->id]);
+        Auth::login($user);
         return redirect()->route('main');
     }
     public function register_view(){
