@@ -11,11 +11,17 @@
     </div>
     @endif
     
-    <form action="{{ route('login') }}" method="post">
-        @csrf
-        <input type="text" id="login" name="login"><br>
-        <input type="password" id="password" name="password"><br>
-        <input type="submit">
-    </form>
+    <form method="post" action="{{route('login')}}" name="login">
+    @csrf
+  <div class="form-element">
+    <label>Логин</label>
+    <input type="text" name="login" pattern="[a-zA-Z0-9]+" required />
+  </div>
+  <div class="form-element">
+    <label>Пароль</label>
+    <input type="password" name="password" required />
+  </div>
+  <button type="submit" name="btn_av" value="login">Войти</button>
+</form>
 </body>
 </html>
