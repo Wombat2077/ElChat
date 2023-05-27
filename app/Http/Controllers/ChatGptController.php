@@ -14,7 +14,7 @@ class ChatGptController extends Controller
 
     {
         $roles = new Roles();
-        $promt = $role!=null?$roles->find($role)->content . promt : promt;
+        $promt = $role!=null?$roles->find($role)->content . $promt : $promt;
         $data = Http::withHeaders([
                     'Content-Type' => 'application/json',
                     'Authorization' => 'Bearer '.env('OPENAI_API_KEY'),
