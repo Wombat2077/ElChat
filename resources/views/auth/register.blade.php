@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout style="Background: solid black;">
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

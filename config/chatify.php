@@ -7,7 +7,7 @@ return [
     |-------------------------------------
     */
     'name' => env('CHATIFY_NAME', 'Chatify Messenger'),
-
+        'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'App\Http\Controllers\vendor\Chatify'),
     /*
     |-------------------------------------
     | The disk on which to store added
