@@ -17,4 +17,4 @@ use App\Http\Controllers\vendor\Chatify\MessagesController;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
-Broadcast::channel("/ai-request", "MessagesController@sendFromGpt")->name("send-answer");
+Broadcast::channel("/chatify/{$from_id}", "MessagesController@sendFromGpt");

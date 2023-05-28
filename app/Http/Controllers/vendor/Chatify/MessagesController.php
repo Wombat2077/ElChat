@@ -148,6 +148,7 @@ class MessagesController extends Controller
                     'to_id' => $request['id'],
                     'message' => Chatify::messageCard($messageData, true)
                 ]);
+                broadcast(new onMessageSent(Auth::user()->id, Chatify::messageCard($messageData, true)));
             }
         }
 
@@ -214,8 +215,6 @@ class MessagesController extends Controller
                 ]);
             }
         }
-
-        sendFromGpt($request);
         // send the response
         return Response::json([
             'status' => '200',

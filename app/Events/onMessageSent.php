@@ -17,9 +17,12 @@ class onMessageSent
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public $from_id;
+    public $promt;
+    public function __construct($from_id, $promt)
     {
-        //
+        $this->from_id = $from_id;
+        $this->promt = $promt;
     }
 
     /**
@@ -29,8 +32,7 @@ class onMessageSent
      */
     public function broadcastOn(): array
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        return new PrivateChannel('chatify/'.$this->from_id);
+
     }
 }

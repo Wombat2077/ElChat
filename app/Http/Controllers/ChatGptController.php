@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 
 class ChatGptController extends Controller
 {
-    public function index($promt): JsonResponse
+    public function index($promt="hello, dude"): JsonResponse
 
     {
         //$roles = new Roles();
